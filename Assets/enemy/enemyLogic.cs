@@ -6,8 +6,11 @@ public class enemyLogic : MonoBehaviour
     public float speedDown = 0.5f;
     public float minX = -8f;
     public float maxX = 8f;
+    public float fireRate = 0.75f;
+    public float fireTimer = 0f;
+    public GameObject enemyBullet;
 
-    private int direction = 1;
+    private int direction = Random.Range(1, -1);
     private float changeDirectionTime;
     private float timer;
     public float health = 100f;
@@ -47,6 +50,13 @@ public class enemyLogic : MonoBehaviour
             direction = Random.value > 0.5f ? 1 : -1;
             SetRandomDirectionTime();
             timer = 0f;
+        }
+        fireTimer -= Time.deltaTime;
+        if (fireTimer <= 0f)
+        {
+            Instantiate(enemyBullet, new Vector3(this.transform.position.x, this.transform.position.y + -0.5f, 0), Quaternion.Euler(0, 0, 180));
+            fireTimer = fireRate;
+            
         }
     }
     void SetRandomDirectionTime()

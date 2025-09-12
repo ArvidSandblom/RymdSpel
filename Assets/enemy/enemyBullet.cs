@@ -1,13 +1,15 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class enemyBullet : MonoBehaviour
+
 {
     public float bulletSpeed = 2.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+       
         Destroy(gameObject, 5f);
 
     }
@@ -19,9 +21,17 @@ public class enemyBullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D player)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript player = collision.gameObject.GetComponent<playerScript>();
+            if (playerHealth != null)
+            {
+                player.TakeDamage(20f); // Adjust damage value as needed
+            }
+            Destroy(gameObject);
+        }
     }
 
 
