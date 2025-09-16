@@ -4,19 +4,20 @@ public class enemyLogic : MonoBehaviour
 {
     public float enemySpeed = 3f;
     public float speedDown = 0.5f;
-    public float minX = -8f;
-    public float maxX = 8f;
+    public float minX = -15f;
+    public float maxX = 15f;
     public float fireRate = 0.75f;
-    public float fireTimer = 0f;
+    private float fireTimer = 0f;
     public GameObject enemyBullet;
 
-    private int direction = Random.Range(1, -1);
+    private int direction;
     private float changeDirectionTime;
     private float timer;
     public float health = 100f;
 
     void Start()
     {
+        direction = Random.Range(1, -1);
         SetRandomDirectionTime();
     }
         
@@ -62,6 +63,10 @@ public class enemyLogic : MonoBehaviour
     void SetRandomDirectionTime()
     {
         changeDirectionTime = Random.Range(0.5f, 2f);
+    }
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
     }
 }
 

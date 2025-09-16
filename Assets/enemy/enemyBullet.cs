@@ -5,7 +5,8 @@ using UnityEngine.UIElements;
 public class enemyBullet : MonoBehaviour
 
 {
-    public float bulletSpeed = 2.5f;
+    public float damage = 10f;
+    public float bulletSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,16 +22,18 @@ public class enemyBullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D player)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             playerScript player = collision.gameObject.GetComponent<playerScript>();
-            if (playerHealth != null)
+            if (player != null)
             {
-                player.TakeDamage(20f); // Adjust damage value as needed
+                player.TakeDamage(damage);
+
             }
             Destroy(gameObject);
+
         }
     }
 

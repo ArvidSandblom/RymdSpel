@@ -7,14 +7,14 @@ public class playerScript : MonoBehaviour
     public GameObject bullet;
     private float fireTimer = 0f;
     public float fireRate = 0.5f;
-    public float maxHealth;
-    public float currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth = 100;
     public float takeDamage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -39,13 +39,13 @@ public class playerScript : MonoBehaviour
         
         if (Input.GetKey(KeyCode.S))
         {
-            if (transform.position.y >= -4.5f)
+            if (transform.position.y >= -9f)
             {
                 transform.Translate(Vector3.down * playerSpeed * Time.deltaTime);
             }
-            else if (transform.position.y <= -4.5)
+            else if (transform.position.y <= -9)
             {
-                transform.position = new Vector3(transform.position.x, -4.5f, 0);
+                transform.position = new Vector3(transform.position.x, -9f, 0);
             }
         }
         if (Input.GetKey(KeyCode.A))
@@ -56,13 +56,13 @@ public class playerScript : MonoBehaviour
         {
             transform.Translate(Vector3.right * playerSpeed * Time.deltaTime);
         }
-        if (transform.position.x <= -11)
+        if (transform.position.x <= -18)
         {
-            transform.position = new Vector3(10.9f, transform.position.y, 0);
+            transform.position = new Vector3(18f, transform.position.y, 0);
         }
-        if (transform.position.x >= 11)
+        if (transform.position.x >= 18)
         {
-            transform.position = new Vector3(-10.9f, transform.position.y, 0);
+            transform.position = new Vector3(-18f, transform.position.y, 0);
         }
         fireTimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.Space) && fireTimer <= 0f)
