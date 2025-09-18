@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8147722983745566037}
   - component: {fileID: 4835379306550979927}
   - component: {fileID: -1390756383517463879}
+  - component: {fileID: 4287356276681171675}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -107,7 +108,7 @@ MonoBehaviour:
   minX: -15
   maxX: 15
   fireRate: 0.75
-  enemyBullet: {fileID: 0}
+  enemyBullet: {fileID: 2554168792684142693, guid: 82ab8af8c050ce941a651e3930281c21, type: 3}
   health: 100
 --- !u!61 &4835379306550979927
 BoxCollider2D:
@@ -139,7 +140,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -182,3 +183,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4287356276681171675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528693890794319304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f752b2199ce35479d9000cdb6006b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 3528693890794319304}

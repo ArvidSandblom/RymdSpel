@@ -6,7 +6,7 @@ public class spawnScript : MonoBehaviour
 {
     public GameObject enemy;
     private int enemyCounter;
-    private GameObject player;
+    private int spawnTimer = 5;
     void Start()
     {
         StartCoroutine(EnemySpawner());
@@ -25,18 +25,22 @@ public class spawnScript : MonoBehaviour
     {
         while (true)
         {
-            if (enemyCounter < 3 && GameObject.Find("Player") != null)
+            if (enemyCounter < 3 && GameObject.Find("player") != null)
             {
-                Instantiate(enemy, new Vector3(0, 11, 0), Quaternion.Euler(0, 0, 180));
+                //Instantiate(enemy, new Vector3(0, 11, 0), Quaternion.Euler(0, 0, 180));
 
                 enemyCounter++;
 
 
-                yield return new WaitForSeconds(5);
+
+                yield return new WaitForSeconds(spawnTimer);
             }
-            else yield return null; 
-
-
+            else
+            {
+                Debug.Log("error spawner");
+                yield return new WaitForSeconds(1);
+            } 
+                
         }
     }
 }

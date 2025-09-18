@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 3528693890794319304, guid: 83f3566ddc99a7e45aedbcbe8b7164cb, type: 3}
+  Player: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}

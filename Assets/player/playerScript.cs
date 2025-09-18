@@ -5,6 +5,7 @@ public class playerScript : MonoBehaviour
 {
     public float playerSpeed = 7.5f;
     public GameObject bullet;
+
     private float fireTimer = 0f;
     public float fireRate = 0.5f;
     public float maxHealth = 100;
@@ -74,5 +75,6 @@ public class playerScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
     }
 }
