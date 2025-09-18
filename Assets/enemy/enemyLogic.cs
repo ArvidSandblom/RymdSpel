@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class enemyLogic : MonoBehaviour
@@ -14,24 +15,30 @@ public class enemyLogic : MonoBehaviour
     private float changeDirectionTime;
     private float timer;
     public float health = 100f;
+    public scoreScript scoreScript;
+    private int scoreToAdd;
+    private float scoreTime;
 
     void Start()
     {
         direction = Random.Range(1, -1);
         SetRandomDirectionTime();
     }
-        
+
 
     void Update()
     {
+        scoreTime += Time.deltaTime;
+        scoreToAdd = ((50 - (int)scoreTime) * 2);
         if (health <= 0f)
         {
             Destroy(gameObject);
+            scoreScript.updateScore(scoreToAdd);
         }
 
         transform.Translate(Vector3.right * enemySpeed * direction * Time.deltaTime);
         transform.Translate(Vector3.down * speedDown * Time.deltaTime);
-        
+
         if (transform.position.x <= minX)
         {
             direction = 1;
@@ -57,7 +64,7 @@ public class enemyLogic : MonoBehaviour
         {
             Instantiate(enemyBullet, new Vector3(this.transform.position.x, this.transform.position.y + -0.5f, 0), Quaternion.Euler(0, 0, 180));
             fireTimer = fireRate;
-            
+
         }
     }
     void SetRandomDirectionTime()
