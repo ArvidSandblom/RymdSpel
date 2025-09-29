@@ -25,6 +25,7 @@ public class bulletLogic : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemyLogic Enemy = collision.gameObject.GetComponent<enemyLogic>();
+
             if (Enemy != null)
             {
                 Enemy.TakeDamage(bulletDamage);                

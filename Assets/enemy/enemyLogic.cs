@@ -15,9 +15,6 @@ public class enemyLogic : MonoBehaviour
     private float changeDirectionTime;
     private float timer;
     public float health = 100f;
-    public scoreScript scoreScript;
-    private int scoreToAdd;
-    private float scoreTime;
 
     void Start()
     {
@@ -28,12 +25,12 @@ public class enemyLogic : MonoBehaviour
 
     void Update()
     {
-        scoreTime += Time.deltaTime;
-        scoreToAdd = ((50 - (int)scoreTime) * 2);
+
         if (health <= 0f)
         {
             Destroy(gameObject);
-            scoreScript.updateScore(scoreToAdd);
+            scoreScript.scoreValue += 100;
+
         }
 
         transform.Translate(Vector3.right * enemySpeed * direction * Time.deltaTime);
