@@ -9,7 +9,7 @@ public class bulletLogic : MonoBehaviour
     void Start()
     {
         
-        Destroy(gameObject, 3f);
+        Destroy(this.gameObject, 3f);
 
     }
 

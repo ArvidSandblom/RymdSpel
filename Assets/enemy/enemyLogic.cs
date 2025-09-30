@@ -7,7 +7,7 @@ public class enemyLogic : MonoBehaviour
     public float speedDown = 0.5f;
     public float minX = -15f;
     public float maxX = 15f;
-    public float fireRate = 0.75f;
+    public float fireRate = 2f;
     private float fireTimer = 0f;
     public GameObject enemyBullet;
 
@@ -29,12 +29,13 @@ public class enemyLogic : MonoBehaviour
         if (health <= 0f)
         {
             Destroy(gameObject);
-            scoreScript.scoreValue += 100;
+            
 
         }
 
         transform.Translate(Vector3.right * enemySpeed * direction * Time.deltaTime);
         transform.Translate(Vector3.down * speedDown * Time.deltaTime);
+        timer += Time.deltaTime;
 
         if (transform.position.x <= minX)
         {
@@ -49,7 +50,7 @@ public class enemyLogic : MonoBehaviour
             timer = 0f;
         }
 
-        timer += Time.deltaTime;
+        
         if (timer >= changeDirectionTime)
         {
             direction = Random.value > 0.5f ? 1 : -1;
@@ -71,6 +72,29 @@ public class enemyLogic : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript Player = collision.gameObject.GetComponent<playerScript>();
+
+            if (Player != null)
+            {
+                Player.TakeDamage(50f);
+            }
+            Destroy(gameObject);
+
+        }
+    }
+    void Die()
+    {
+        if (health <= 0f)
+        {
+            Destroy(gameObject);
+            enemySpawner.enemyCounter--;
+            scoreScript.scoreValue += 100;
+        }
     }
 }
 

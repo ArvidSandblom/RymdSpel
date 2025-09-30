@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spawnScript : MonoBehaviour
+public class enemySpawner : MonoBehaviour
 {
     public GameObject enemy;
-    private int enemyCounter;
+    public static int enemyCounter;
     private int spawnTimer = 5;
     void Start()
     {
@@ -21,9 +21,9 @@ public class spawnScript : MonoBehaviour
     {
         while (true)
         {
-            if (enemyCounter < 3 && GameObject.Find("player") != null)
+            if (enemyCounter <= 3 && GameObject.Find("Player") != null)
             {
-                Instantiate(enemy, new Vector3(0, 11, 0), Quaternion.identity);
+                Instantiate(enemy, new Vector3(Random.Range(-19,19), 11, 0), Quaternion.identity);
                 enemyCounter++;
                 yield return new WaitForSeconds(spawnTimer);
             }
