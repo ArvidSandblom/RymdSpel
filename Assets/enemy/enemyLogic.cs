@@ -28,9 +28,9 @@ public class enemyLogic : MonoBehaviour
 
         if (health <= 0f)
         {
+            enemySpawner.enemyCounter--;
+            scoreScript.scoreValue += 100;
             Destroy(gameObject);
-            
-
         }
 
         transform.Translate(Vector3.right * enemySpeed * direction * Time.deltaTime);
@@ -87,14 +87,6 @@ public class enemyLogic : MonoBehaviour
 
         }
     }
-    void Die()
-    {
-        if (health <= 0f)
-        {
-            Destroy(gameObject);
-            enemySpawner.enemyCounter--;
-            scoreScript.scoreValue += 100;
-        }
-    }
+    
 }
 
