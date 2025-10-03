@@ -1,7 +1,11 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class managerScript : MonoBehaviour
 {
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +16,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Update()
     {
         
+    }
+    IEnumerator powerupSpawner()
+    {
+        
+        while (true)
+        {
+            if (playerScript.isPlayerAlive)
+            {
+
+            }
+        }
+        
+        yield return new WaitForSeconds(10);
     }
 }

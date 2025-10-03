@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class enemyBullet : MonoBehaviour
 
 {
-    public float damage = 10f;
+    public float damage = 20f;
     public float bulletSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

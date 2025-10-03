@@ -18,25 +18,27 @@ public class playerScript : MonoBehaviour
     private float lastDamageTime = -Mathf.Infinity;
     public float healDelay = 5f;
     public float healAmount = 5f;
+
     public float healInterval = 0.5f;
     private float lastHealTime = 0f;
-
+    
+    public int maxLives = 3;
+    public int currentLives = 3;
+    public Image[] lifeImages;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isPlayerAlive = true;
+        UpdateLifeImages();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (currentHealth <= 0f)
         {
-            isPlayerAlive = false;
-            Destroy(gameObject);
-
+            LoseLifeAndRespawn();
         }
         if (Time.time - lastDamageTime > healDelay && currentHealth < maxHealth)
         {
@@ -57,7 +59,7 @@ public class playerScript : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 0, 0);
             }
         }
-        
+
         if (Input.GetKey(KeyCode.S))
         {
             if (transform.position.y >= -9f)
@@ -81,7 +83,7 @@ public class playerScript : MonoBehaviour
         {
             transform.position = new Vector3(18f, transform.position.y, 0);
         }
-        if (transform.position.x >= 18)
+        else if (transform.position.x >= 18)
         {
             transform.position = new Vector3(-18f, transform.position.y, 0);
         }
@@ -97,13 +99,39 @@ public class playerScript : MonoBehaviour
         currentHealth -= damage;
         healthBar.fillAmount = currentHealth / maxHealth;
         lastDamageTime = Time.time;
-
     }
     public void Heal(float healingAmount)
     {
         currentHealth += healingAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthBar.fillAmount = currentHealth / maxHealth;        
+        healthBar.fillAmount = currentHealth / maxHealth;
     }
-
+    void LoseLifeAndRespawn()
+    {
+        if (currentLives > 1)
+        {
+            currentLives--;
+            UpdateLifeImages();
+            Respawn();
+        }
+        else
+        {
+            isPlayerAlive = false;
+            Destroy(gameObject);
+        }
+    }
+    void Respawn()
+    {
+        currentHealth = maxHealth;
+        healthBar.fillAmount = 1f;
+        transform.position = new Vector3(0, -5, 0);
+        isPlayerAlive = true;
+    }
+    void UpdateLifeImages()
+    {
+        for (int i = 0; i < lifeImages.Length; i++)
+        {
+            lifeImages[i].enabled = i < currentLives;
+        }
+    }
 }
