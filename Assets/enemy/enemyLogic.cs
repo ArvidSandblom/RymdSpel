@@ -28,7 +28,7 @@ public class enemyLogic : MonoBehaviour
 
         if (health <= 0f)
         {
-            enemySpawner.enemyCounter--;
+            managerScript.enemyCounter--;
             scoreScript.scoreValue += 100;
             Destroy(gameObject);
         }

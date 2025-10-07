@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,18 @@ public class playerScript : MonoBehaviour
     public float currentHealth = 100;
     public float takeDamage;
     public Image healthBar;
+    public Image shieldBar;
     public bool isHealing = false;
     private float lastDamageTime = -Mathf.Infinity;
     public float healDelay = 5f;
     public float healAmount = 5f;
+    private float shield = 0f;
+    private bool attackSpeedActive = false;
+    private bool speedActive = false;
+    private float attackSpeedTimer = 0f;
+    private float speedTimer = 0f;
+    public float defaultFireRate = 0.5f;
+    private float defaultPlayerSpeed 7.5f;
 
     public float healInterval = 0.5f;
     private float lastHealTime = 0f;
@@ -31,6 +40,7 @@ public class playerScript : MonoBehaviour
     {
         isPlayerAlive = true;
         UpdateLifeImages();
+
     }
 
     // Update is called once per frame
@@ -48,6 +58,16 @@ public class playerScript : MonoBehaviour
                 lastHealTime = Time.time;
             }
         }
+        if (attackSpeedActive && Time.time >= attackSpeedTimer)
+        {
+            fireRate = defaultFireRate;
+            attackSpeedActive = false;
+        }
+        if (speedActive && Time.time >= speedTimer)
+        {
+            playerSpeed = defaultPlayerSpeed;
+            speedActive = false;
+        }
         if (Input.GetKey(KeyCode.W))
         {
             if (transform.position.y <= 0)
@@ -59,7 +79,6 @@ public class playerScript : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 0, 0);
             }
         }
-
         if (Input.GetKey(KeyCode.S))
         {
             if (transform.position.y >= -9f)
@@ -96,15 +115,32 @@ public class playerScript : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        healthBar.fillAmount = currentHealth / maxHealth;
-        lastDamageTime = Time.time;
+        if (shield > 0)
+        {
+            float shieldAbsorb = Mathf.Min(shield, damage);
+            shield -= shieldAbsorb;
+            damage -= shieldAbsorb;
+            shieldBar.fillAmount = shield / 100f;
+        }
+
+        if (damage > 0)
+        {
+            currentHealth -= damage;
+            healthBar.fillAmount = currentHealth / maxHealth;
+            lastDamageTime = Time.time;
+        }
     }
     public void Heal(float healingAmount)
     {
         currentHealth += healingAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBar.fillAmount = currentHealth / maxHealth;
+    }
+    public void addShield(float shieldAmount)
+    {
+        shield += shieldAmount;
+        shield = Mathf.Clamp(shield, 0, 100f);
+        shieldBar.fillAmount = shield / 100f;
     }
     void LoseLifeAndRespawn()
     {
@@ -134,4 +170,38 @@ public class playerScript : MonoBehaviour
             lifeImages[i].enabled = i < currentLives;
         }
     }
+    private void OnTriggerEnter2D(Collider2D powerUps)
+    {
+        if (powerUps.CompareTag("powerup_AS"))
+        {
+            Destroy(powerUps.gameObject);
+            fireRate /= 2;
+            Debug.Log("Attack Speed collected!");
+            attackSpeedActive = true;
+            int powerupDuration = 5;            
+        }
+        else if (powerUps.CompareTag("powerup_Speed"))
+        {
+            Destroy(powerUps.gameObject);
+            playerSpeed *= 2;
+            Debug.Log("Speed collected!");
+            speedActive = true;
+            int powerupDuration = 5;
+        }
+        else if (powerUps.name == "powerup_Shield")
+        {
+            Destroy(powerUps.gameObject);
+            addShield(50f);
+            Debug.Log("Shield collected!");
+            shieldActive = true;
+            int powerupDuration = 5;
+                    attackSpeedExpireTime = Mathf.Max(attackSpeedExpireTime, Time.time) + powerupDuration;
+
+        }
+    }
+    IEnumerator powerUpFunc()
+    {
+        yield return new WaitForSeconds(5);
+    }
+    
 }

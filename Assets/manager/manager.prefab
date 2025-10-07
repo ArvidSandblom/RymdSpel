@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedc95c9b9fe8a74e891bf368b2d0a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUp_Shield: {fileID: 5390164259282378061, guid: 81426b541ca3a9248abb793928addd93, type: 3}
+  powerUp_Speed: {fileID: 6030861535764137011, guid: 2555672f536188d43b1cf1ba70be8ae0, type: 3}
+  powerUp_AS: {fileID: 8060961629130572309, guid: d850f912b338f054facab1e911492c30, type: 3}

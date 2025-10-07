@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Score
+  - powerup_AS
+  - powerup_Shield
+  - powerup_Speed
   layers:
   - Default
   - TransparentFX
