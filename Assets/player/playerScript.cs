@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -5,32 +6,37 @@ using UnityEngine.UI;
 
 public class playerScript : MonoBehaviour
 {
+    // Movement
     public float playerSpeed = 7.5f;
-    public GameObject bullet;
-    public static bool isPlayerAlive = true;
-
+    // Shooting
     private float fireTimer = 0f;
     public float fireRate = 0.5f;
+    public GameObject bullet;
+    // Health and Shield
     public float maxHealth = 100;
     public float currentHealth = 100;
     public float takeDamage;
-    public Image healthBar;
-    public Image shieldBar;
     public bool isHealing = false;
     private float lastDamageTime = -Mathf.Infinity;
     public float healDelay = 5f;
     public float healAmount = 5f;
     private float shield = 0f;
+    public float healInterval = 0.5f;
+    private float lastHealTime = 0f;
+    // UI Elements
+    public Image healthBar;
+    public Image shieldBar;
+    public Image timer_AS;
+    public Image timer_Speed;
+    // Power-up management
     private bool attackSpeedActive = false;
     private bool speedActive = false;
     private float attackSpeedTimer = 0f;
     private float speedTimer = 0f;
-    public float defaultFireRate = 0.5f;
-    private float defaultPlayerSpeed 7.5f;
-
-    public float healInterval = 0.5f;
-    private float lastHealTime = 0f;
-    
+    private float defaultFireRate = 0.5f;
+    private float defaultPlayerSpeed = 7.5f;
+    // Lives management
+    public static bool isPlayerAlive = true;
     public int maxLives = 3;
     public int currentLives = 3;
     public Image[] lifeImages;
@@ -40,12 +46,15 @@ public class playerScript : MonoBehaviour
     {
         isPlayerAlive = true;
         UpdateLifeImages();
+        defaultFireRate = fireRate;
+        defaultPlayerSpeed = playerSpeed;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Player Death & Healing
         if (currentHealth <= 0f)
         {
             LoseLifeAndRespawn();
@@ -58,6 +67,7 @@ public class playerScript : MonoBehaviour
                 lastHealTime = Time.time;
             }
         }
+        // Power-up duration management
         if (attackSpeedActive && Time.time >= attackSpeedTimer)
         {
             fireRate = defaultFireRate;
@@ -68,6 +78,7 @@ public class playerScript : MonoBehaviour
             playerSpeed = defaultPlayerSpeed;
             speedActive = false;
         }
+        // Player Movement
         if (Input.GetKey(KeyCode.W))
         {
             if (transform.position.y <= 0)
@@ -111,6 +122,27 @@ public class playerScript : MonoBehaviour
         {
             Instantiate(bullet, new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0), this.transform.rotation);
             fireTimer = fireRate;
+        }
+        // power-up timers
+        if (attackSpeedActive)
+        {
+            float maxASDuration = 5f;
+            float remainingAS = Mathf.Clamp(attackSpeedTimer - Time.time, 0f, maxASDuration);
+            timer_AS.fillAmount = remainingAS / maxASDuration;
+        }
+        else
+        {
+            timer_AS.fillAmount = 0f;
+        }
+        if (speedActive)
+        {
+            float maxSpeedDuration = 5f;
+            float remainingSpeed = Mathf.Clamp(speedTimer - Time.time, 0f, maxSpeedDuration);
+            timer_Speed.fillAmount = remainingSpeed / maxSpeedDuration;
+        }
+        else
+        {
+            timer_Speed.fillAmount = 0f;
         }
     }
     public void TakeDamage(float damage)
@@ -174,34 +206,30 @@ public class playerScript : MonoBehaviour
     {
         if (powerUps.CompareTag("powerup_AS"))
         {
-            Destroy(powerUps.gameObject);
-            fireRate /= 2;
-            Debug.Log("Attack Speed collected!");
-            attackSpeedActive = true;
-            int powerupDuration = 5;            
+            float powerupDuration = 5f;
+            Destroy(powerUps.gameObject);            
+            if (!attackSpeedActive)
+            {
+                attackSpeedActive = true;
+                fireRate /= 2f;
+            }
+            attackSpeedTimer = Mathf.Max(attackSpeedTimer, Time.time) + powerupDuration;
         }
         else if (powerUps.CompareTag("powerup_Speed"))
         {
-            Destroy(powerUps.gameObject);
-            playerSpeed *= 2;
-            Debug.Log("Speed collected!");
-            speedActive = true;
             int powerupDuration = 5;
+            Destroy(powerUps.gameObject);                                    
+            if (!speedActive)
+            {
+                speedActive = true;
+                playerSpeed *= 2;
+            }
+            speedTimer = Mathf.Max(speedTimer, Time.time) + powerupDuration;
         }
-        else if (powerUps.name == "powerup_Shield")
+        else if (powerUps.CompareTag("powerup_Shield"))
         {
             Destroy(powerUps.gameObject);
             addShield(50f);
-            Debug.Log("Shield collected!");
-            shieldActive = true;
-            int powerupDuration = 5;
-                    attackSpeedExpireTime = Mathf.Max(attackSpeedExpireTime, Time.time) + powerupDuration;
-
         }
     }
-    IEnumerator powerUpFunc()
-    {
-        yield return new WaitForSeconds(5);
-    }
-    
 }

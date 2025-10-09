@@ -7,7 +7,7 @@ public class enemyLogic : MonoBehaviour
     public float speedDown = 0.5f;
     public float minX = -15f;
     public float maxX = 15f;
-    public float fireRate = 2f;
+    public float fireRate;
     private float fireTimer = 0f;
     public GameObject enemyBullet;
 
@@ -24,8 +24,7 @@ public class enemyLogic : MonoBehaviour
 
 
     void Update()
-    {
-
+    {       
         if (health <= 0f)
         {
             managerScript.enemyCounter--;
@@ -60,6 +59,7 @@ public class enemyLogic : MonoBehaviour
         fireTimer -= Time.deltaTime;
         if (fireTimer <= 0f)
         {
+            fireRate = Random.Range(1f, 4f);
             Instantiate(enemyBullet, new Vector3(this.transform.position.x, this.transform.position.y + -0.5f, 0), Quaternion.Euler(0, 0, 180));
             fireTimer = fireRate;
 
