@@ -9,6 +9,7 @@ TagManager:
   - powerup_AS
   - powerup_Shield
   - powerup_Speed
+  - powerup_BL
   layers:
   - Default
   - TransparentFX
