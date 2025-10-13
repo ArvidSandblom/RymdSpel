@@ -8,7 +8,6 @@ public class managerScript : MonoBehaviour
     public GameObject powerUp_Shield;
     public GameObject powerUp_Speed;
     public GameObject powerUp_AS;
-    public GameObject powerUp_BigLaser;
     public float spawnInterval = 10f;
     public GameObject enemy;
     public static int enemyCounter = 0;
@@ -22,7 +21,7 @@ public class managerScript : MonoBehaviour
         Instantiate(powerUp_Shield, new Vector3(-5, -4, 0), Quaternion.identity);
         Instantiate(powerUp_Speed, new Vector3(-1, -4, 0), Quaternion.identity);
         Instantiate(powerUp_AS, new Vector3(-3, -4, 0), Quaternion.identity);
-        Instantiate(powerUp_BigLaser, new Vector3(3, -4, 0), Quaternion.identity);
+        //Instantiate(powerUp_BigLaser, new Vector3(3, -4, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -37,7 +36,7 @@ public class managerScript : MonoBehaviour
             float randomX = Random.Range(-12f, 12f);
             float randomY = Random.Range(-6f, -0.5f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
-            int randomPowerup = Random.Range(0, 7);
+            int randomPowerup = Random.Range(0, 6);
             if (randomPowerup == 0 || randomPowerup == 1)
             {
                 Instantiate(powerUp_Shield, spawnPosition, Quaternion.identity);
@@ -49,10 +48,6 @@ public class managerScript : MonoBehaviour
             else if (randomPowerup == 4 || randomPowerup == 5)
             {
                 Instantiate(powerUp_AS, spawnPosition, Quaternion.identity);
-            }
-            else if (randomPowerup == 5)
-            {
-                Instantiate(powerUp_BigLaser, spawnPosition, Quaternion.identity);
             }
             yield return new WaitForSeconds(spawnInterval);
         }

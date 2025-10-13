@@ -25,22 +25,20 @@ public class playerScript : MonoBehaviour
     private float shield = 0f;
     public float healInterval = 0.5f;
     private float lastHealTime = 0f;
+    public GameObject shieldObject;
     // UI Elements
     public Image healthBar;
     public Image shieldBar;
     public Image timer_AS;
     public Image timer_Speed;
-    public Image timer_BL;
     // Power-up management
     private bool attackSpeedActive = false;
     private bool speedActive = false;
-    public GameObject bigLaser;
-    private bool bigLaserActive = false;
-    private float bigLaserTimer = 0f;
     private float attackSpeedTimer = 0f;
     private float speedTimer = 0f;
     private float defaultFireRate = 0.5f;
     private float defaultPlayerSpeed = 7.5f;
+    private bool shieldActive = false;
     // Lives management
     public static bool isPlayerAlive = true;
     public int maxLives = 3;
@@ -64,7 +62,7 @@ public class playerScript : MonoBehaviour
         if (currentHealth <= 0f)
         {
             LoseLifeAndRespawn();
-        }
+        }        
         if (Time.time - lastDamageTime > healDelay && currentHealth < maxHealth)
         {
             if (Time.time - lastHealTime > healInterval)
@@ -83,10 +81,6 @@ public class playerScript : MonoBehaviour
         {
             playerSpeed = defaultPlayerSpeed;
             speedActive = false;
-        }
-        if (bigLaserActive && Time.time >= bigLaserTimer)
-        {
-            bigLaserActive = false;
         }
 
         // Player Movement
@@ -130,12 +124,8 @@ public class playerScript : MonoBehaviour
         }
         fireTimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
-        {
-            if (bigLaserActive)
-            {
-                return;
-            }
-            else if (fireTimer <= 0f)
+        {          
+            if (fireTimer <= 0f)
             {
                 Instantiate(bullet, new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0), this.transform.rotation);
                 fireTimer = fireRate;
@@ -161,16 +151,6 @@ public class playerScript : MonoBehaviour
         else
         {
             timer_Speed.fillAmount = 0f;
-        }
-        if (bigLaserActive)
-        {
-            float maxBLDuration = 5f;
-            float remainingBL = Mathf.Clamp(bigLaserTimer - Time.time, 0f, maxBLDuration);
-            timer_BL.fillAmount = remainingBL / maxBLDuration;
-        }
-        else 
-        {
-            timer_BL.fillAmount = 0f;
         }
     }
     public void TakeDamage(float damage)
@@ -230,6 +210,7 @@ public class playerScript : MonoBehaviour
             lifeImages[i].enabled = i < currentLives;
         }
     }
+    //Power-up collection
     private void OnTriggerEnter2D(Collider2D powerUps)
     {
         if (powerUps.CompareTag("powerup_AS"))
@@ -258,17 +239,13 @@ public class playerScript : MonoBehaviour
         {
             Destroy(powerUps.gameObject);
             addShield(50f);
-        }
-        else if (powerUps.CompareTag("powerup_BL"))
-        {
-            int powerupDuration = 5;
-            Destroy(powerUps.gameObject);
-            if (!bigLaserActive)
+            if (!shieldActive)
             {
-                bigLaserActive = true;
-                Instantiate(bigLaser, new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0), this.transform.rotation);
+                Instantiate(shieldObject, this.transform);
+                shieldActive = true;
             }
-            bigLaserTimer = Mathf.Max(bigLaserTimer, Time.time) + powerupDuration;
-        }
+            
+
+        }        
     }
 }
