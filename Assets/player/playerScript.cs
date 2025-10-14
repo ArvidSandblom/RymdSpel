@@ -39,6 +39,7 @@ public class playerScript : MonoBehaviour
     private float defaultFireRate = 0.5f;
     private float defaultPlayerSpeed = 7.5f;
     private bool shieldActive = false;
+    private GameObject activeShieldObject;
     // Lives management
     public static bool isPlayerAlive = true;
     public int maxLives = 3;
@@ -152,6 +153,7 @@ public class playerScript : MonoBehaviour
         {
             timer_Speed.fillAmount = 0f;
         }
+        
     }
     public void TakeDamage(float damage)
     {
@@ -161,6 +163,16 @@ public class playerScript : MonoBehaviour
             shield -= shieldAbsorb;
             damage -= shieldAbsorb;
             shieldBar.fillAmount = shield / 100f;
+            if (shield <= 0f && shieldActive)
+            {
+                shield = 0f;
+                shieldActive = false;
+                if (activeShieldObject != null)
+                {
+                    Destroy(activeShieldObject);
+                    activeShieldObject = null;
+                }
+            }
         }
 
         if (damage > 0)
@@ -241,8 +253,9 @@ public class playerScript : MonoBehaviour
             addShield(50f);
             if (!shieldActive)
             {
-                Instantiate(shieldObject, this.transform);
+                activeShieldObject = Instantiate(shieldObject, this.transform);
                 shieldActive = true;
+
             }
             
 

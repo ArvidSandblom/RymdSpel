@@ -487,38 +487,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8736562015827888284, guid: 8918f6782d6a2774abbd7c09c2a44773, type: 3}
   m_PrefabInstance: {fileID: 518947323}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &771130897 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-  m_PrefabInstance: {fileID: 2127457267}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &771130902
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771130897}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!224 &783619862 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7910030280754347805, guid: de3ef1beaf1b52f40a6da3498928f988, type: 3}
@@ -1358,16 +1326,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: m_Name
       value: player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5642654350104907928, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1409,30 +1369,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6304584324598839514, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: bigLaser
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: timer_AS
       value: 
       objectReference: {fileID: 9495385}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: timer_BL
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1831658055}
-    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: isHealing
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: shieldBar
       value: 
@@ -1442,16 +1386,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 783619864}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: shieldObject
-      value: 
-      objectReference: {fileID: 3261159217517739358, guid: ccd3204d530df164eb71a798330b0c61, type: 3}
-    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: currentHealth
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      propertyPath: lifeImages.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: 'lifeImages.Array.data[0]'
@@ -1465,14 +1401,10 @@ PrefabInstance:
       propertyPath: 'lifeImages.Array.data[2]'
       value: 
       objectReference: {fileID: 841758627}
-    m_RemovedComponents:
-    - {fileID: -5532615937074427430, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2247180593362211192, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 771130902}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
 --- !u!1001 &482762535585190805
 PrefabInstance:
