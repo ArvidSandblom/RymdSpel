@@ -81,7 +81,7 @@ public class enemyLogic : MonoBehaviour
 
             if (Player != null)
             {
-                Player.TakeDamage(50f);
+                Player.TakeDamage(bulletLogic.bulletDamage);
             }
             Destroy(gameObject);
 

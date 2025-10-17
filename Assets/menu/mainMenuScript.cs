@@ -12,4 +12,14 @@ public class mainMenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+    public void mainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void shipSelection()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+
 }

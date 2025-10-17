@@ -3,16 +3,17 @@ using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playerScript : MonoBehaviour
 {
     // Movement
-    public float playerSpeed = 7.5f;
+    public float playerSpeed = 7f;
     // Shooting
     private float fireTimer = 0f;
     public float fireRate = 0.5f;
-    public GameObject bullet;
-    
+    public GameObject bullet;    
+
 
     // Health and Shield
     public float maxHealth = 100;
@@ -39,7 +40,6 @@ public class playerScript : MonoBehaviour
     private float defaultFireRate = 0.5f;
     private float defaultPlayerSpeed = 7.5f;
     private bool shieldActive = false;
-    private GameObject activeShieldObject;
     // Lives management
     public static bool isPlayerAlive = true;
     public int maxLives = 3;
@@ -145,7 +145,7 @@ public class playerScript : MonoBehaviour
         }
         if (speedActive)
         {
-            float maxSpeedDuration = 5f;
+            float maxSpeedDuration = 5f;  
             float remainingSpeed = Mathf.Clamp(speedTimer - Time.time, 0f, maxSpeedDuration);
             timer_Speed.fillAmount = remainingSpeed / maxSpeedDuration;
         }
@@ -153,7 +153,6 @@ public class playerScript : MonoBehaviour
         {
             timer_Speed.fillAmount = 0f;
         }
-        
     }
     public void TakeDamage(float damage)
     {
@@ -163,16 +162,6 @@ public class playerScript : MonoBehaviour
             shield -= shieldAbsorb;
             damage -= shieldAbsorb;
             shieldBar.fillAmount = shield / 100f;
-            if (shield <= 0f && shieldActive)
-            {
-                shield = 0f;
-                shieldActive = false;
-                if (activeShieldObject != null)
-                {
-                    Destroy(activeShieldObject);
-                    activeShieldObject = null;
-                }
-            }
         }
 
         if (damage > 0)
@@ -206,6 +195,7 @@ public class playerScript : MonoBehaviour
         {
             isPlayerAlive = false;
             Destroy(gameObject);
+            SceneManager.LoadScene(2);
         }
     }
     void Respawn()
@@ -221,7 +211,7 @@ public class playerScript : MonoBehaviour
         {
             lifeImages[i].enabled = i < currentLives;
         }
-    }
+    } 
     //Power-up collection
     private void OnTriggerEnter2D(Collider2D powerUps)
     {
@@ -253,9 +243,8 @@ public class playerScript : MonoBehaviour
             addShield(50f);
             if (!shieldActive)
             {
-                activeShieldObject = Instantiate(shieldObject, this.transform);
+                Instantiate(shieldObject, this.transform);
                 shieldActive = true;
-
             }
             
 
