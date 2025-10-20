@@ -12,7 +12,8 @@ public class playerScript : MonoBehaviour
     // Shooting
     private float fireTimer = 0f;
     public float fireRate = 0.5f;
-    public GameObject bullet;    
+    public GameObject bullet;
+    public float damage = 20f;
 
 
     // Health and Shield
@@ -128,7 +129,9 @@ public class playerScript : MonoBehaviour
         {          
             if (fireTimer <= 0f)
             {
-                Instantiate(bullet, new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0), this.transform.rotation);
+                GameObject thisBullet;                
+                thisBullet = Instantiate(bullet, new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, 0), this.transform.rotation);
+                thisBullet.GetComponent<bulletLogic>().bulletDamage = damage;
                 fireTimer = fireRate;
             }            
         }
