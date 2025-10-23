@@ -706,8 +706,20 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 691402855516313942, guid: de9f88f76bc93c44b87e3c5cc0cb761c, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 691402855516313942, guid: de9f88f76bc93c44b87e3c5cc0cb761c, type: 3}
       propertyPath: m_fontSizeBase
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 691402855516313942, guid: de9f88f76bc93c44b87e3c5cc0cb761c, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 691402855516313942, guid: de9f88f76bc93c44b87e3c5cc0cb761c, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7622479293682935559, guid: de9f88f76bc93c44b87e3c5cc0cb761c, type: 3}
       propertyPath: m_Name
@@ -1451,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 783619864}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: currentLives
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: shieldObject
@@ -1459,8 +1471,28 @@ PrefabInstance:
       objectReference: {fileID: 3261159217517739358, guid: ccd3204d530df164eb71a798330b0c61, type: 3}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: currentHealth
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+      propertyPath: ships.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+      propertyPath: 'ships.Array.data[0]'
+      value: 
+      objectReference: {fileID: -2600750394082780314, guid: c02943d42f26db645a4cbeb3ffd81cc3, type: 3}
+    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+      propertyPath: 'ships.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1746991664267116445, guid: ecac9912491cc62438dbe2637d9dfc0b, type: 3}
+    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+      propertyPath: 'ships.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1577856489068930602, guid: c72d4699e0220a44eb6f7a1706254698, type: 3}
+    - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
+      propertyPath: 'ships.Array.data[3]'
+      value: 
+      objectReference: {fileID: -8613746428151470745, guid: 699b38f85b5e8b942b32aebda9923245, type: 3}
     - target: {fileID: 7047526607344304301, guid: 09aecc0e756ee4148b42d90845d33fea, type: 3}
       propertyPath: lifeImages.Array.size
       value: 3

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class bulletLogic : MonoBehaviour
 {
-    public float bulletDamage;
+    public float bulletDamage = 0f;
     public float bulletSpeed = 15f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -16,6 +16,8 @@ public class enemyLogic : MonoBehaviour
     private float timer;
     public float health = 100f;
 
+    private float contactDamage = 20f;
+
     void Start()
     {
         direction = Random.Range(1, -1);
@@ -81,7 +83,7 @@ public class enemyLogic : MonoBehaviour
 
             if (Player != null)
             {
-                Player.TakeDamage(bulletLogic.bulletDamage);
+                Player.TakeDamage(contactDamage);
             }
             Destroy(gameObject);
 

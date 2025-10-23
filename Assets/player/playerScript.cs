@@ -14,6 +14,8 @@ public class playerScript : MonoBehaviour
     public float fireRate = 0.5f;
     public GameObject bullet;
     public float damage = 20f;
+    public Sprite[] ships;
+    public GameObject playerStats;
 
 
     // Health and Shield
@@ -50,8 +52,10 @@ public class playerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerStats = GameObject.Find("statsManager");
         isPlayerAlive = true;
         UpdateLifeImages();
+        UpdatePlayerStats();
         defaultFireRate = fireRate;
         defaultPlayerSpeed = playerSpeed;
 
@@ -183,8 +187,8 @@ public class playerScript : MonoBehaviour
     public void addShield(float shieldAmount)
     {
         shield += shieldAmount;
-        shield = Mathf.Clamp(shield, 0, 100f);
-        shieldBar.fillAmount = shield / 100f;
+        shield = Mathf.Clamp(shield, 0, maxHealth);
+        shieldBar.fillAmount = shield / maxHealth;
     }
     void LoseLifeAndRespawn()
     {
@@ -252,5 +256,36 @@ public class playerScript : MonoBehaviour
             
 
         }        
+    }
+    public void UpdatePlayerStats()
+    {
+        int selectedIndex = playerStats.GetComponent<playerStats>().selectedShipIndex;
+        switch (selectedIndex)
+        {
+            case 0:
+                playerStats.GetComponent<playerStats>().cruiserClass();
+                break;
+            case 1:
+                playerStats.GetComponent<playerStats>().destroyerClass();
+                break;
+            case 2:
+                playerStats.GetComponent<playerStats>().battleshipClass();
+                break;
+            case 3:
+                playerStats.GetComponent<playerStats>().corvetteClass();
+                break;
+            default:
+                playerStats.GetComponent<playerStats>().cruiserClass();
+                break;
+        }
+        // Apply stats to player
+        playerSpeed = playerStats.GetComponent<playerStats>().playerSpeed;
+        fireRate = playerStats.GetComponent<playerStats>().fireRate;
+        damage = playerStats.GetComponent<playerStats>().sDamage;
+        maxHealth = playerStats.GetComponent<playerStats>().maxHealth;
+        currentHealth = maxHealth;
+        healthBar.fillAmount = 1f;
+        // Update ship sprite
+        GetComponent<SpriteRenderer>().sprite = ships[selectedIndex];
     }
 }
