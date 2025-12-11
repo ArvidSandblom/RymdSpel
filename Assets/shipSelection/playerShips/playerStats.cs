@@ -21,16 +21,6 @@ public class playerStats : MonoBehaviour
     {
         updateShip();
     }
-    public void destroyerClass()
-    {
-        // Destroyer class stats
-        className = "Destroyer";
-        playerSpeed = 8f;
-        fireRate = 0.2f;
-        sDamage = 20f;
-        maxHealth = 50f;
-        selectedShipIndex = 1;
-    }
     public void cruiserClass()
     {     
         // Cruiser class stats
@@ -40,6 +30,16 @@ public class playerStats : MonoBehaviour
         sDamage = 20f;
         maxHealth = 100f;
         selectedShipIndex = 0;
+    }
+    public void destroyerClass()
+    {
+        // Destroyer class stats
+        className = "Destroyer";
+        playerSpeed = 8f;
+        fireRate = 0.2f;
+        sDamage = 20f;
+        maxHealth = 50f;
+        selectedShipIndex = 1;
     }
     public void battleshipClass()
     {

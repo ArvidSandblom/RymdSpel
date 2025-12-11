@@ -6,6 +6,7 @@ public class scoreScript : MonoBehaviour
 {
 
     public static int scoreValue = 0;
+    public int scoreValueCopy;
     TMP_Text score;
     void Start()
     {
@@ -15,6 +16,7 @@ public class scoreScript : MonoBehaviour
 
     void Update()
     {
+        scoreValueCopy = scoreValue;
         score.text = "Score: " + scoreValue;
     }
 }

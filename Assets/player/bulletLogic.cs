@@ -33,6 +33,16 @@ public class bulletLogic : MonoBehaviour
             Destroy(gameObject);
 
         }
+        if (collision.gameObject.CompareTag("Dreadnought"))
+        {
+            dreadnoughtLogic Dreadnought = collision.gameObject.GetComponent<dreadnoughtLogic>();
+
+            if (Dreadnought != null)
+            {
+                Dreadnought.TakeDamage(bulletDamage);
+            }
+            Destroy(gameObject);
+        }
     }
 
 
