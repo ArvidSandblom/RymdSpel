@@ -439,8 +439,8 @@ MonoBehaviour:
   dreadHealth: 300
   dreadDamage: 30
   dreadFireRate: 2
-  dreadBullet: {fileID: 337488496687779090, guid: 87d8464a172654c4099eea343a2c779d, type: 3}
-  dreadMissile: {fileID: 4796141167648927526, guid: 6b5241f7c661177489d446b0f6c3602c, type: 3}
+  dreadBullet: {fileID: 1280952373362414181, guid: 87d8464a172654c4099eea343a2c779d, type: 3}
+  dreadMissile: {fileID: 8834728191020334072, guid: 6b5241f7c661177489d446b0f6c3602c, type: 3}
 --- !u!61 &8764823503550300068
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,25 +1,51 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class playerStats : MonoBehaviour
 {    
     TMP_Text shipClassName;
     TMP_Text shipStats;
+    public Image shipImage;
+    public Sprite[] shipSprites;
     public int selectedShipIndex;
     public float playerSpeed;
     public float fireRate;
     public float sDamage;
     public float maxHealth;
-    public string className;
+    public string className;    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (GameObject.Find("statsManager") && GameObject.Find("statsManager") != this.gameObject)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            mainMenuStatsDisplay();
+        }        
         updateShip();
+    }
+    void mainMenuStatsDisplay()
+    {
+
+        shipClassName = GameObject.Find("shipName").GetComponent<TMP_Text>();
+        shipStats = GameObject.Find("shipStatistics").GetComponent<TMP_Text>();
+        shipImage = GameObject.Find("Image").GetComponent<Image>();        
+        shipImage.sprite = shipSprites[selectedShipIndex];
+
+        shipClassName.text = className + " Class";
+        shipStats.text = "Speed: " + playerSpeed.ToString() + "\n" +
+                         "Fire Rate: " + fireRate.ToString() + "\n" +
+                         "Damage: " + sDamage.ToString() + "\n" +
+                         "Max Health: " + maxHealth.ToString();
     }
     public void cruiserClass()
     {     

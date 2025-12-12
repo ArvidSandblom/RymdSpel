@@ -14,7 +14,8 @@ public class managerScript : MonoBehaviour
     public GameObject enemy;
     public GameObject boss;
     public static int enemyCounter = 0;
-    private int spawnTimer = 5;
+    public static int enemiesDestroyed = 0;
+    private float spawnTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,8 +33,10 @@ public class managerScript : MonoBehaviour
     }
     IEnumerator SpawnPowerup()
     {
+        
         while (playerScript.isPlayerAlive)
         {
+            spawnTimer = Random.Range(3f, 5f);
             float randomX = Random.Range(-12f, 12f);
             float randomY = Random.Range(-6f, -0.5f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
@@ -57,16 +60,16 @@ public class managerScript : MonoBehaviour
     {
         while (playerScript.isPlayerAlive)
         {
-            if (scoreText.GetComponent<scoreScript>().scoreValueCopy >= 500)
+            if (enemiesDestroyed == 10)
             {
                 Instantiate(boss, new Vector3(0, 11, 0), Quaternion.identity);
                 foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
                     Destroy(enemy);
-                }
+                }                
                 yield break;
             }
-            else if (enemyCounter <= 3 && GameObject.Find("player") != null)
+            else if (enemyCounter <= 5 && GameObject.Find("player") != null && enemiesDestroyed < 10)
             {
                 Instantiate(enemy, new Vector3(Random.Range(-19, 19), 11, 0), Quaternion.identity);
                 enemyCounter++;

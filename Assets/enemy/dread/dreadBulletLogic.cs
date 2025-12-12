@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class dreadBulletLogic : MonoBehaviour
 {
-    public float bulletDamage = 10f;
-    public float bulletSpeed = 10f;
+    public float bulletDamage = 20f;
+    public float bulletSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Destroy(this.gameObject, 5f);        
     }
 
     // Update is called once per frame
