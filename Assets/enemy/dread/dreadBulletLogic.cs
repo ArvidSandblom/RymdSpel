@@ -15,13 +15,12 @@ public class dreadBulletLogic : MonoBehaviour
     {
         transform.Translate(Vector3.down * bulletSpeed * Time.deltaTime);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+        
+     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             playerScript player = collision.gameObject.GetComponent<playerScript>();
-
             if (player != null)
             {
                 player.TakeDamage(bulletDamage);

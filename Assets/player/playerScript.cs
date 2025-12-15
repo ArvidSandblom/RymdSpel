@@ -52,18 +52,23 @@ public class playerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        shieldObject = GameObject.Find("shield");
         playerStats = GameObject.Find("statsManager");
         isPlayerAlive = true;
         UpdateLifeImages();
         UpdatePlayerStats();
         defaultFireRate = fireRate;
         defaultPlayerSpeed = playerSpeed;
+        shieldObject.SetActive(false);
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        
         // Player Death & Healing
         if (currentHealth <= 0f)
         {
@@ -163,14 +168,18 @@ public class playerScript : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        if (shield > 0)
+        if (shield > 0 && shieldActive)
         {
             float shieldAbsorb = Mathf.Min(shield, damage);
             shield -= shieldAbsorb;
             damage -= shieldAbsorb;
             shieldBar.fillAmount = shield / 100f;
         }
-
+        if (shield <= 0 && shieldActive)
+        {
+            shieldActive = false;
+            shieldObject.SetActive(false);
+        }                        
         if (damage > 0)
         {
             currentHealth -= damage;
@@ -249,9 +258,8 @@ public class playerScript : MonoBehaviour
             Destroy(powerUps.gameObject);
             addShield(50f);
             if (!shieldActive)
-            {
-                Instantiate(shieldObject, this.transform);
-                shieldActive = true;
+            {                
+                shieldObject.SetActive(true);
             }
             
 

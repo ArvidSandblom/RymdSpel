@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DreadMissileLogic : MonoBehaviour
 {
-    public float missileSpeed = 4f;
+    public float missileSpeed = 7f;
     public float missileDamage = 40f;
-    public float turnSpeed = 120f;   // Rotationsshastighet i grader per sekund
+    public float turnSpeed = 60f;   // Rotationsshastighet i grader per sekund
     
     private Transform target;
 
@@ -12,40 +13,56 @@ public class DreadMissileLogic : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;        
+        
     }
 
     void Update()
     {
         if (hasLock && target != null)
         {
+            // Calculate direction to player
             Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
-            direction.Normalize();
-
-            // Avgöra var spelaren är i förhållande till missilen
+            
+            // Rotate missile toward the target
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            // Istället för att sätta rotationen direkt, rotera gradvis mot målet
-            float angle = Mathf.MoveTowardsAngle(
-                transform.eulerAngles.z,
-                targetAngle,
-                turnSpeed * Time.deltaTime
-            );
-
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            // Missilen ska förlora låsningen om den har passerat spelaren
+            float currentAngle = transform.eulerAngles.z;
+            float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, turnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 0, newAngle);
+            
+            // Check if missile has passed the player (lost lock)
+            direction.Normalize();
             float dot = Vector2.Dot(transform.right, direction);
             if (dot < 0f)
             {
                 hasLock = false; // Lost lock
             }
+            
+            // Check collision with player
+            if (Vector2.Distance(transform.position, target.position) < 0.5f)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        // Annars ska den fortsätta rakt fram
+        // Move missile forward
         transform.Translate(Vector2.right * missileSpeed * Time.deltaTime);
+        
+        // Destroy if out of bounds
         if (transform.position.y < -10f || transform.position.y > 10f || transform.position.x < -20f || transform.position.x > 20f)
         {
+            Destroy(gameObject);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript player = collision.gameObject.GetComponent<playerScript>();
+            if (player != null)
+            {
+                player.TakeDamage(missileDamage);
+            }
             Destroy(gameObject);
         }
     }

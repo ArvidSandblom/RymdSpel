@@ -16,6 +16,7 @@ public class managerScript : MonoBehaviour
     public static int enemyCounter = 0;
     public static int enemiesDestroyed = 0;
     private float spawnTimer;
+    private bool spawnEnemies;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,7 +68,7 @@ public class managerScript : MonoBehaviour
                 {
                     Destroy(enemy);
                 }                
-                yield break;
+                yield return null;
             }
             else if (enemyCounter <= 5 && GameObject.Find("player") != null && enemiesDestroyed < 10)
             {

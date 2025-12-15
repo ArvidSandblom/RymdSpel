@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8537753130409592839}
   - component: {fileID: 5480003992425145507}
   m_Layer: 5
-  m_Name: dread health red
+  m_Name: dreadHealthRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1015316005236934782}
   - component: {fileID: 2625750863513906329}
   m_Layer: 5
-  m_Name: dread health black
+  m_Name: dreadHealthBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 2073386135064073720}
   - component: {fileID: 3360810104006724415}
   m_Layer: 5
-  m_Name: dread health green
+  m_Name: dreadHealthGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8218960535998283124
@@ -435,12 +435,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ae2135371d8334aa34fc79a1d86fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  targetPosition: {x: 0, y: 0}
   dreadMoveSpeed: 2
   dreadHealth: 300
+  dreadMaxHealth: 300
   dreadDamage: 30
   dreadFireRate: 2
   dreadBullet: {fileID: 1280952373362414181, guid: 87d8464a172654c4099eea343a2c779d, type: 3}
   dreadMissile: {fileID: 8834728191020334072, guid: 6b5241f7c661177489d446b0f6c3602c, type: 3}
+  phase1: 0
+  phase2: 0
+  phase3: 0
+  phase4: 0
 --- !u!61 &8764823503550300068
 BoxCollider2D:
   m_ObjectHideFlags: 0
