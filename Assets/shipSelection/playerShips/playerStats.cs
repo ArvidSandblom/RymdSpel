@@ -36,16 +36,44 @@ public class playerStats : MonoBehaviour
     void mainMenuStatsDisplay()
     {
 
-        shipClassName = GameObject.Find("shipName").GetComponent<TMP_Text>();
-        shipStats = GameObject.Find("shipStatistics").GetComponent<TMP_Text>();
-        shipImage = GameObject.Find("Image").GetComponent<Image>();        
-        shipImage.sprite = shipSprites[selectedShipIndex];
+        if (shipClassName == null)
+        {
+            var go = GameObject.Find("shipName");
+            if (go != null) shipClassName = go.GetComponent<TMP_Text>();
+            else Debug.LogWarning("Could not find GameObject 'shipName' for UI text.", this);
+        }
 
-        shipClassName.text = className + " Class";
-        shipStats.text = "Speed: " + playerSpeed.ToString() + "\n" +
-                         "Fire Rate: " + fireRate.ToString() + "\n" +
-                         "Damage: " + sDamage.ToString() + "\n" +
-                         "Max Health: " + maxHealth.ToString();
+        if (shipStats == null)
+        {
+            var go = GameObject.Find("shipStatistics");
+            if (go != null) shipStats = go.GetComponent<TMP_Text>();
+            else Debug.LogWarning("Could not find GameObject 'shipStatistics' for UI text.", this);
+        }
+
+        if (shipImage == null)
+        {
+            var go = GameObject.Find("Image");
+            if (go != null) shipImage = go.GetComponent<Image>();
+            else Debug.LogWarning("Could not find GameObject 'Image' for ship preview.", this);
+        }
+
+        if (shipImage != null && shipSprites != null && shipSprites.Length > 0 && selectedShipIndex >= 0 && selectedShipIndex < shipSprites.Length)
+        {
+            shipImage.sprite = shipSprites[selectedShipIndex];
+        }
+
+        if (shipClassName != null)
+        {
+            shipClassName.text = className + " Class";
+        }
+
+        if (shipStats != null)
+        {
+            shipStats.text = "Speed: " + playerSpeed.ToString() + "\n" +
+                             "Fire Rate: " + fireRate.ToString() + "\n" +
+                             "Damage: " + sDamage.ToString() + "\n" +
+                             "Max Health: " + maxHealth.ToString();
+        }
     }
     public void cruiserClass()
     {     

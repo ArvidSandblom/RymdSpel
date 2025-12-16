@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class scoreScript : MonoBehaviour
+public class highScoreScript : MonoBehaviour
 {
 
     public static int scoreValue = 0;

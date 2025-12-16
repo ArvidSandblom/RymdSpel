@@ -210,6 +210,7 @@ public class playerScript : MonoBehaviour
         else
         {
             isPlayerAlive = false;
+            ScoreManager.SaveFinalScore(highScoreScript.scoreValue, "Player");
             Destroy(gameObject);
             SceneManager.LoadScene(2);
         }

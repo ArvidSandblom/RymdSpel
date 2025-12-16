@@ -31,7 +31,7 @@ public class enemyLogic : MonoBehaviour
         {
             managerScript.enemyCounter--;
             managerScript.enemiesDestroyed++;
-            scoreScript.scoreValue += 100;
+            highScoreScript.scoreValue += 100;
             Destroy(gameObject);
         }
 
