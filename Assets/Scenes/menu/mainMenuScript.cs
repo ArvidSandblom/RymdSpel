@@ -10,7 +10,6 @@ public class mainMenuScript : MonoBehaviour
     void Start()
     {
         leaderboard = FindAnyObjectByType<shipCarry>();
-
         
         if (playerSelection != null)
         {
@@ -39,21 +38,24 @@ public class mainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
-    public void menuSwitch()
+    public void changePlayer()
     {        
-        int index = 0;
-        if (index == 0)
-        {
-            if (menu != null) menu.SetActive(false);
-            if (playerSelection != null) playerSelection.SetActive(true);
-            index = 1;
-        }
-        else if (index == 1)
-        {
-            
-            if (menu != null) menu.SetActive(true);
-            if (playerSelection != null) playerSelection.SetActive(false);
-            index = 0;
-        }
+        // Show player selection (called from UI button)
+        if (menu != null) menu.SetActive(false);
+        else Debug.LogWarning("`menu` is null when calling changePlayer().", this);
+
+        if (playerSelection != null) playerSelection.SetActive(true);
+        else Debug.LogWarning("`playerSelection` is null when calling changePlayer().", this);
     }
+    public void backToMenu()
+    {
+        // Return to main menu (called from UI button)
+        if (menu != null) menu.SetActive(true);
+        else Debug.LogWarning("`menu` is null when calling backToMenu().", this);
+
+        if (playerSelection != null) playerSelection.SetActive(false);
+        else Debug.LogWarning("`playerSelection` is null when calling backToMenu().", this);
+    }
+
+
 }
