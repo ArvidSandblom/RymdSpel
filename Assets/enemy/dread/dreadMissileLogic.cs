@@ -1,11 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DreadMissileLogic : MonoBehaviour
 {
-    public float missileSpeed = 7f;
+    public float missileSpeed = 10f;
     public float missileDamage = 40f;
-    public float turnSpeed = 60f;   // Rotationsshastighet i grader per sekund
+    public float turnSpeed = 45f;   // Rotationsshastighet i grader per sekund
     
     private Transform target;
 
@@ -13,6 +12,7 @@ public class DreadMissileLogic : MonoBehaviour
 
     void Start()
     {
+        missileDamage += (managerScript.bossesDestroyed * 10f);
         target = GameObject.FindGameObjectWithTag("Player").transform;        
         
     }

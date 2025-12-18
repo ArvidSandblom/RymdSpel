@@ -6,8 +6,8 @@ public class dreadnoughtLogic : MonoBehaviour
 {
     public Vector2 targetPosition;
     public float dreadMoveSpeed = 2f;
-    public float dreadHealth = 300f;
-    public float dreadMaxHealth = 300f;
+    public float dreadHealth = 600f;
+    public float dreadMaxHealth = 600f;
     private Image healthBar;
     public float dreadDamage = 30f;
     public float dreadFireRate = 2f;
@@ -31,6 +31,8 @@ public class dreadnoughtLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        dreadMaxHealth = dreadMaxHealth + (managerScript.bossesDestroyed * 1.5f);
+        dreadHealth = dreadMaxHealth;
         healthBar = GameObject.Find("dreadHealthGreen").GetComponent<Image>();
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(dreadnoughtBullet());
@@ -162,7 +164,12 @@ public class dreadnoughtLogic : MonoBehaviour
         healthBar.fillAmount = dreadHealth / dreadMaxHealth;        
         if (dreadHealth <= 0)
         {
-            
+            player.GetComponent<playerScript>().addExperience(100);
+            highScoreScript.scoreValue += 1000;
+            managerScript.enemyCounter--;
+            managerScript.enemiesDestroyed += 1;
+            managerScript.enemySpawnTimer *= 0.9f;
+            managerScript.bossesDestroyed += 1;
             Destroy(this.gameObject);
         }
     }

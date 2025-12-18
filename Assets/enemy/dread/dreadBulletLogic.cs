@@ -7,6 +7,7 @@ public class dreadBulletLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        bulletDamage = bulletDamage + (managerScript.bossesDestroyed * 5f);
         Destroy(this.gameObject, 5f);        
     }
 

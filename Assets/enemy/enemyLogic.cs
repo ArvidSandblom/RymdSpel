@@ -5,16 +5,19 @@ public class enemyLogic : MonoBehaviour
 {
     public float enemySpeed = 3f;
     public float speedDown = 0.5f;
+    public bool isEMP = false;
     public float minX = -15f;
     public float maxX = 15f;
     public float fireRate;
     private float fireTimer = 0f;
     public GameObject enemyBullet;
-
+    private GameObject player;
     private int direction;
     private float changeDirectionTime;
     private float timer;
     public float health = 100f;
+    private bool canFire = true;
+    private Coroutine empCoroutine = null;
 
     private float contactDamage = 20f;
 
@@ -22,6 +25,7 @@ public class enemyLogic : MonoBehaviour
     {
         direction = Random.Range(1, -1);
         SetRandomDirectionTime();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -32,13 +36,29 @@ public class enemyLogic : MonoBehaviour
             managerScript.enemyCounter--;
             managerScript.enemiesDestroyed++;
             highScoreScript.scoreValue += 100;
+            player.GetComponent<playerScript>().addExperience(100);
             Destroy(gameObject);
         }
-
+        
+        if (isEMP)
+        {
+            // Start EMP effect if not already active
+            if (empCoroutine == null)
+            {
+                empCoroutine = StartCoroutine(isEMPd());
+            }
+            isEMP = false;
+        }
         transform.Translate(Vector3.right * enemySpeed * direction * Time.deltaTime);
         transform.Translate(Vector3.down * speedDown * Time.deltaTime);
+        
         timer += Time.deltaTime;
 
+        if(transform.position.y <= -11)
+        {
+            managerScript.enemyCounter--;
+            Destroy(gameObject);
+        }
         if (transform.position.x <= minX)
         {
             direction = 1;
@@ -60,7 +80,7 @@ public class enemyLogic : MonoBehaviour
             timer = 0f;
         }
         fireTimer -= Time.deltaTime;
-        if (fireTimer <= 0f)
+        if (fireTimer <= 0f && canFire)
         {
             fireRate = Random.Range(1f, 4f);
             Instantiate(enemyBullet, new Vector3(this.transform.position.x, this.transform.position.y + -0.5f, 0), Quaternion.Euler(0, 0, 180));
@@ -89,6 +109,18 @@ public class enemyLogic : MonoBehaviour
             Destroy(gameObject);
 
         }
+    }
+    IEnumerator isEMPd()
+    {
+        speedDown = 0;
+        enemySpeed = 0;
+        canFire = false;
+        yield return new WaitForSeconds(5);
+        speedDown = 0.5f;
+        enemySpeed = 3;
+        canFire = true;
+        empCoroutine = null;
+
     }
     
 }

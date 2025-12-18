@@ -1,15 +1,15 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+// using TMPro;
+// using UnityEngine.UI;
 
 public class shipCarry : MonoBehaviour
 {
-    public int[] scoreValues = new int[10];
-    public string[] playerNames = new string[10];
-    public TMP_Text highScoreText;
-    public InputField usernameInputField;
-    private int scoreCount = 0;
-    public string userName;
+    // public int[] scoreValues = new int[10];
+    // public string[] playerNames = new string[10];
+    // public TMP_Text highScoreText;
+    // public InputField usernameInputField;
+    // private int scoreCount = 0;
+    // public string userName;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +18,7 @@ public class shipCarry : MonoBehaviour
     }
 
     // Update is called once per frame
+    /* Todo perhaps...
     void Update()
     {
         string displayText = "";
@@ -85,5 +86,5 @@ public class shipCarry : MonoBehaviour
     {
         return userName;
     }
-    
+    */
 }

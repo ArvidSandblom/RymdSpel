@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class bulletLogic : MonoBehaviour
+public class friendBulletLogic : MonoBehaviour
 {
-    public float bulletDamage = 0f;
+    public float bulletDamage = 10f;
     public float bulletSpeed = 15f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

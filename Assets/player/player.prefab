@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2775387671749736210}
   - component: {fileID: 6032288148674037242}
   m_Layer: 0
-  m_Name: Player
+  m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerScript
   playerSpeed: 7
+  moveSpeedMultiplier: 1
+  dodgeChance: 0
   fireRate: 0.5
+  attackSpeedMultiplier: 1
   bullet: {fileID: 5708818767724574866, guid: 9160f427825df774a959fe62159e3c3b, type: 3}
+  homingBullet: {fileID: 5708818767724574866, guid: d1b04a2f406337c45895a721a27ae082, type: 3}
   damage: 20
   ships:
   - {fileID: -2600750394082780314, guid: c02943d42f26db645a4cbeb3ffd81cc3, type: 3}
@@ -58,6 +62,7 @@ MonoBehaviour:
   - {fileID: 1577856489068930602, guid: c72d4699e0220a44eb6f7a1706254698, type: 3}
   - {fileID: -8613746428151470745, guid: 699b38f85b5e8b942b32aebda9923245, type: 3}
   playerStats: {fileID: 0}
+  friend: {fileID: 0}
   maxHealth: 100
   currentHealth: 100
   takeDamage: 0
@@ -70,12 +75,17 @@ MonoBehaviour:
   shieldBar: {fileID: 0}
   timer_AS: {fileID: 0}
   timer_Speed: {fileID: 0}
+  shieldMultiplier: 1
   maxLives: 3
   currentLives: 3
   lifeImages:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  experienceBar: {fileID: 0}
+  level: {fileID: 0}
+  levelUpButton: {fileID: 0}
+  levelUpScreen: {fileID: 0}
 --- !u!212 &253208593024795548
 SpriteRenderer:
   m_ObjectHideFlags: 0

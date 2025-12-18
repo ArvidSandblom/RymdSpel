@@ -28,7 +28,10 @@ public class enemyBullet : MonoBehaviour
             playerScript player = collision.gameObject.GetComponent<playerScript>();
             if (player != null)
             {
-                player.TakeDamage(damage);
+                if (player.GetComponent<playerScript>().dodgeChance < Random.Range(0, 101))
+                {                    
+                    player.TakeDamage(damage);
+                }
 
             }
             Destroy(gameObject);
