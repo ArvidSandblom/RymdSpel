@@ -4,7 +4,7 @@ public class homingBullet : MonoBehaviour
 {
     public float bulletSpeed = 10f;
     public float bulletDamage = 40f;
-    public float turnSpeed = 15f;   // Rotationsshastighet i grader per sekund
+    public float turnSpeed = 5f;   // Rotationsshastighet i grader per sekund
     
     private Transform target;
 

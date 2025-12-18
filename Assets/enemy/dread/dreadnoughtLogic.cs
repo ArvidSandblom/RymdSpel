@@ -6,8 +6,8 @@ public class dreadnoughtLogic : MonoBehaviour
 {
     public Vector2 targetPosition;
     public float dreadMoveSpeed = 2f;
-    public float dreadHealth = 600f;
-    public float dreadMaxHealth = 600f;
+    public float dreadHealth = 1000f;
+    public float dreadMaxHealth = 1000f;
     private Image healthBar;
     public float dreadDamage = 30f;
     public float dreadFireRate = 2f;
@@ -57,7 +57,8 @@ public class dreadnoughtLogic : MonoBehaviour
             Vector3 playerPos = player.transform.position;
             Vector3 direction = playerPos - (Vector3)this.transform.position;
             direction.Normalize();
-            thisMissile = Instantiate(dreadMissile, new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0), Quaternion.Euler(0, 0, Mathf.Atan2(direction.x, direction.y*-1)));
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            thisMissile = Instantiate(dreadMissile, new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0), Quaternion.Euler(0, 0, angle));
             yield return new WaitForSeconds(dreadFireRate * 3);
         }
         yield return null;

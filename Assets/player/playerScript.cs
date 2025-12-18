@@ -69,7 +69,7 @@ public class playerScript : MonoBehaviour
     public GameObject levelUpButton;
     public GameObject levelUpScreen;
     public GameObject manager;
-    public float EMPCooldown = 10f;
+    public float EMPCooldown = 30f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

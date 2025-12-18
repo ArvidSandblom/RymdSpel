@@ -11290,6 +11290,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1243093575}
     - target: {fileID: -5654973950963369716, guid: 979ac9b578cde214ca3e9828aa915cde, type: 3}
+      propertyPath: levelUpScreenLegendary.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5654973950963369716, guid: 979ac9b578cde214ca3e9828aa915cde, type: 3}
       propertyPath: levelUpScreensUncommon.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -11313,6 +11317,10 @@ PrefabInstance:
       propertyPath: 'levelUpScreensCommon.Array.data[4]'
       value: 
       objectReference: {fileID: 1804483896}
+    - target: {fileID: -5654973950963369716, guid: 979ac9b578cde214ca3e9828aa915cde, type: 3}
+      propertyPath: 'levelUpScreenLegendary.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1455358277}
     - target: {fileID: -5654973950963369716, guid: 979ac9b578cde214ca3e9828aa915cde, type: 3}
       propertyPath: 'levelUpScreensUncommon.Array.data[0]'
       value: 

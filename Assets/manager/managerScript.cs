@@ -28,7 +28,7 @@ public class managerScript : MonoBehaviour
     public GameObject[] levelUpScreensUncommon;
     public GameObject[] levelUpScreensRare;
     public GameObject[] levelUpScreensEpic;
-    public GameObject levelUpScreenLegendary;
+    public GameObject[] levelUpScreenLegendary;
     public Transform[] levelUpPositions; // assign 3 UI positions in Inspector
     public Transform levelUpPoolParent; // optional: assign a transform to keep pooled option objects
     
@@ -131,7 +131,7 @@ public class managerScript : MonoBehaviour
                 // Give one frame to let spawned enemies register
                 yield return null;
             }
-            if (enemiesDestroyed >= 10 + bossesDestroyed)
+            if (enemiesDestroyed >= 10 + bossesDestroyed*2)
             {
                 Instantiate(boss, new Vector3(0f, 11f, 0f), Quaternion.identity);                
                 foreach (var e in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -257,7 +257,7 @@ public class managerScript : MonoBehaviour
             else if (roll <= 74) source = levelUpScreensUncommon;
             else if (roll <= 89) source = levelUpScreensRare;
             else if (roll <= 97) source = levelUpScreensEpic;
-            else source = new GameObject[] { levelUpScreenLegendary };
+            else if (roll > 97) source = levelUpScreenLegendary;
 
             if (source == null || source.Length == 0)
             {
@@ -389,6 +389,8 @@ public class managerScript : MonoBehaviour
         if (!player.GetComponent<playerScript>().sideShots){
 
             player.GetComponent<playerScript>().sideShots = true;
+            player.GetComponent<playerScript>().sideShotsIndexMinus--;
+            player.GetComponent<playerScript>().sideShotsIndexPlus++;
         }
         else {
             player.GetComponent<playerScript>().sideShotsIndexMinus--;
@@ -415,7 +417,7 @@ public class managerScript : MonoBehaviour
         player.GetComponent<playerScript>().homingShots = true;
         }
         else {
-            player.GetComponent<homingBullet>().turnSpeed+=10f;
+            player.GetComponent<homingBullet>().turnSpeed+=5f;
         }
         stopPauseAndContinue();
     }
